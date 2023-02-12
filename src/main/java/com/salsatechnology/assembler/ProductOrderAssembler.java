@@ -1,0 +1,46 @@
+package com.salsatechnology.assembler;
+
+import com.salsatechnology.dto.ProductOrderByUsernameDTO;
+import com.salsatechnology.dto.ProductOrderDTO;
+import com.salsatechnology.factory.Product;
+import com.salsatechnology.factory.ProductFactory;
+import com.salsatechnology.model.ProductOrder;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Component
+public class ProductOrderAssembler {
+    public ProductOrder toEntity(ProductOrderDTO productOrderDTO) {
+        ProductOrder productOrder = new ProductOrder();
+
+        Product product = ProductFactory.getFactory(productOrderDTO);
+        ProductOrderResolver productResolver = new ProductOrderResolver(productOrderDTO, product);
+
+        productOrder.setUserName(productOrderDTO.getUserName());
+        productOrder.setProductType(productOrderDTO.getProductType());
+        productOrder.setTimeHour(productOrderDTO.getTimeHour());
+        productOrder.setProductValue(productResolver.getProductValue());
+        productOrder.setProductTotal(productResolver.getTotalValue());
+        productOrder.setUserAmount(productResolver.getUserAmount());
+
+        return productOrder;
+    }
+
+    public List<ProductOrderByUsernameDTO> toModel(List<ProductOrder> productOrderByUsername) {
+
+        return productOrderByUsername.stream()
+                .map(productOrder -> {
+                    ProductOrderByUsernameDTO productOrderByUsernameDTO = new ProductOrderByUsernameDTO();
+                    productOrderByUsernameDTO.setProductType(productOrder.getProductType());
+                    productOrderByUsernameDTO.setTimeHour(productOrder.getTimeHour());
+                    productOrderByUsernameDTO.setProductTotal(productOrder.getProductTotal());
+                    productOrderByUsernameDTO.setProductValue(productOrder.getProductValue());
+                    productOrderByUsernameDTO.setUserAmount(productOrder.getUserAmount());
+
+                    return productOrderByUsernameDTO;
+                })
+                .collect(Collectors.toList());
+    }
+}
