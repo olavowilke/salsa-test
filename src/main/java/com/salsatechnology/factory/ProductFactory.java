@@ -4,20 +4,20 @@ import com.salsatechnology.dto.ProductOrderDTO;
 import com.salsatechnology.model.ProductType;
 
 public class ProductFactory {
-    public static Product getFactory(ProductOrderDTO productOrderDTO) {
+    public static ProductStrategy getFactory(ProductOrderDTO productOrderDTO) {
         ProductType productType = productOrderDTO.getProductType();
 
-        switch (productType){
+        switch (productType) {
             case SURFBOARD:
-                return new Surfboard();
+                return new SurfboardStrategy();
             case BEACH_CHAIR:
-                return new BeachChair();
+                return new BeachChairStrategy();
             case SUNSHADE:
-                return new Sunshade();
+                return new SunshadeStrategy();
             case SAND_BOARD:
-                return new SandBoard();
+                return new SandBoardStrategy();
             case BEACH_TABLE:
-                return new BeachTable();
+                return new BeachTableStrategy();
             default:
                 return null;
         }

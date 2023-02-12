@@ -2,8 +2,8 @@ package com.salsatechnology.assembler;
 
 import com.salsatechnology.dto.ProductOrderByUsernameDTO;
 import com.salsatechnology.dto.ProductOrderDTO;
-import com.salsatechnology.factory.Product;
 import com.salsatechnology.factory.ProductFactory;
+import com.salsatechnology.factory.ProductStrategy;
 import com.salsatechnology.model.ProductOrder;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ public class ProductOrderAssembler {
     public ProductOrder toEntity(ProductOrderDTO productOrderDTO) {
         ProductOrder productOrder = new ProductOrder();
 
-        Product product = ProductFactory.getFactory(productOrderDTO);
+        ProductStrategy product = ProductFactory.getFactory(productOrderDTO);
         ProductOrderResolver productResolver = new ProductOrderResolver(productOrderDTO, product);
 
         productOrder.setUserName(productOrderDTO.getUserName());

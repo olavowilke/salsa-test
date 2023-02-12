@@ -1,7 +1,7 @@
 package com.salsatechnology.assembler;
 
 import com.salsatechnology.dto.ProductOrderDTO;
-import com.salsatechnology.factory.Product;
+import com.salsatechnology.factory.ProductStrategy;
 import lombok.Getter;
 
 @Getter
@@ -11,7 +11,7 @@ public class ProductOrderResolver {
     private final Long userAmount;
     private final Long productValue;
 
-    public ProductOrderResolver(ProductOrderDTO productOrderDTO, Product product) {
+    public ProductOrderResolver(ProductOrderDTO productOrderDTO, ProductStrategy product) {
         this.productValue = calculateProductValue(product.productValue());
         this.totalValue = calculateTotalValue(productOrderDTO.getTimeHour(), product.productValue());
         this.userAmount = calculateUserAmount(productOrderDTO.getTimeHour(), product.productValue(), product.userValue());

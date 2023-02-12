@@ -12,15 +12,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductOrderService {
 
-	private final ProductOrderRepository productOrderRepository;
+    private final ProductOrderRepository productOrderRepository;
 
-	@Transactional
-	public ProductOrder createOrder(ProductOrder productOrder) {
+    @Transactional
+    public ProductOrder createOrder(ProductOrder productOrder) {
 
-		return productOrderRepository.save(productOrder);
-	}
+        return productOrderRepository.save(productOrder);
+    }
 
-	public List<ProductOrder> getByUsername(String username) {
-		return productOrderRepository.findByUserNameIgnoreCase(username);
-	}
+    public List<ProductOrder> getByUsername(String username) {
+        return productOrderRepository.findByUserNameIgnoreCase(username);
+    }
 }

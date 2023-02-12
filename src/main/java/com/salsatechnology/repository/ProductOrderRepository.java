@@ -1,9 +1,8 @@
 package com.salsatechnology.repository;
 
+import com.salsatechnology.model.ProductOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.salsatechnology.model.ProductOrder;
 
 import java.util.List;
 
